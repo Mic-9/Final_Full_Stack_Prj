@@ -20,10 +20,14 @@ class UserController extends Controller
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:8|confirmed',
             ]);
+
+            $userData = $validatedData;
+            unset($userData['is_admin']);
+
             $user = User::create([
-                'username' => $validatedData['username'],
-                'email' => $validatedData['email'],
-                'password' => Hash::make($validatedData['password']),
+                'username' => $userData['username'],
+                'email' => $userData['email'],
+                'password' => Hash::make($userData['password']),
             ]);
 
             $token = $user->createToken('auth_token')->plainTextToken;
@@ -91,11 +95,14 @@ class UserController extends Controller
             'password' => 'sometimes|required|string|min:8|confirmed',
         ]);
 
-        if (isset($validatedData['password'])) {
-            $validatedData['password'] = Hash::make($validatedData['password']);
+        $dataToUpdate = $validatedData;
+        unset($dataToUpdate['is_admin']);
+
+        if (isset($dataToUpdate['password'])) {
+            $dataToUpdate['password'] = Hash::make($dataToUpdate['password']);
         }
 
-        $user->update($validatedData);
+        $user->update($dataToUpdate);
 
         return response()->json([
             'message' => 'Profile updated successfully',
