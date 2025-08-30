@@ -30,4 +30,22 @@ class MatchController extends Controller
             'match' => $match
         ], 201);
     }
+
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'team_1_score' => 'nullable|integer',
+            'team_2_score' => 'nullable|integer',
+            'status' => 'nullable|string',
+        ]);
+
+        $match = RugbyMatch::findorFail($id);
+
+        $match->update($validatedData);
+
+        return response()->json([
+            'message' => 'Match updated successfully',
+            'match' => $match
+        ]);
+    }
 }
