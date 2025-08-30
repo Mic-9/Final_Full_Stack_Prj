@@ -18,3 +18,6 @@ Route::middleware('auth:sanctum')->put('/user', [UserController::class, 'update'
 Route::get('/matches', [MatchController::class, 'index']);
 Route::middleware('auth:sanctum')->post('/matches', [MatchController::class, 'store']);
 Route::middleware('auth:sanctum')->put('/matches/{id}', [MatchController::class, 'update']);
+Route::middleware('auth:sanctum')->post('/matches/{match}/favorite', [MatchController::class, 'favorite']);
+Route::middleware('auth:sanctum')->get('/user/favorites', [MatchController::class, 'favorites']);
+Route::middleware('auth:sanctum')->delete('/matches/{match}/favorite', [MatchController::class, 'unfavorite']);

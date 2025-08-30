@@ -30,4 +30,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function matches()
+    {
+        return $this->belongsToMany(RugbyMatch::class, 'user_matches', 'user_id', 'match_id');
+    }
 }

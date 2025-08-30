@@ -12,6 +12,7 @@ class MatchController extends Controller
         $matches = RugbyMatch::all();
         return response()->json($matches);
     }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -47,5 +48,30 @@ class MatchController extends Controller
             'message' => 'Match updated successfully',
             'match' => $match
         ]);
+    }
+
+    public function favorite(Request $request, RugbyMatch $match)
+    {
+        $request->user()->matches()->attach($match->id);
+
+        return response()->json([
+            'message' => 'Match added to favorites',
+        ], 201);
+    }
+
+    public function favorites(Request $request)
+    {
+        $favoritesMatches = $request->user()->matches()->get();
+
+        return response()->json($favoritesMatches);
+    }
+
+    public function unfavorite(Request $request, RugbyMatch $match)
+    {
+        $request->user()->matches()->detach($match->id);
+
+        return response()->json([
+            'message' => 'Match removed from favorites',
+        ], 200);
     }
 }

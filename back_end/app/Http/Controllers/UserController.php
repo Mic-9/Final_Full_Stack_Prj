@@ -92,13 +92,13 @@ class UserController extends Controller
         ]);
 
         if (isset($validatedData['password'])) {
-            $user->password = Hash::make($validatedData['password']);
+            $validatedData['password'] = Hash::make($validatedData['password']);
         }
 
         $user->update($validatedData);
 
         return response()->json([
-            'message' => 'User updated successfully',
+            'message' => 'Profile updated successfully',
             'user' => $user
         ]);
     }
