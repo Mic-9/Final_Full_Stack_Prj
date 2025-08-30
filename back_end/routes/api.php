@@ -11,7 +11,8 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 //USER
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
-
+Route::middleware('auth:sanctum')->post('/logout', [UserController::class, 'logout']);
+Route::middleware('auth:sanctum')->put('/user', [UserController::class, 'update']);
 
 //MATCHES
 Route::get('/matches', [MatchController::class, 'index']);
