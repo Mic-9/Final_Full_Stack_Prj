@@ -7,9 +7,23 @@ use Illuminate\Http\Request;
 
 class MatchController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $matches = RugbyMatch::all();
+        $query = RugbyMatch::query();
+
+        if ($request->has('team')) {
+            $team = $request->get('team');
+            $query->where('team_1', 'LIKE', "%" . $team . "%")
+                ->orWhere('team_2', 'LIKE', "%" . $team . "%");
+        };
+
+        if ($request->has('month') && $request->get('year')) {
+            $query->whereMonth('match_date', $request->get('month'))
+                ->whereYear('match_date', $request->get('year'));
+        };
+
+        $matches = $query->get();
+
         return response()->json($matches);
     }
 
