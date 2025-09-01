@@ -13,14 +13,29 @@ class MatchController extends Controller
 
         if ($request->has('team')) {
             $team = $request->get('team');
-            $query->where('team_1', 'LIKE', "%" . $team . "%")
-                ->orWhere('team_2', 'LIKE', "%" . $team . "%");
-        };
+            $query->where(function ($q) use ($team) {
+                $q->where('team_1', 'LIKE', "%" . $team . "%")
+                    ->orWhere('team_2', 'LIKE', "%" . $team . "%");
+            });
+        }
+
+        if ($request->has('category')) {
+            $category = $request->get('category');
+            $query->where(function ($q) use ($category) {
+                $q->where('team_1', 'LIKE', "%" . $category . "%")
+                    ->orWhere('team_2', 'LIKE', "%" . $category . "%");
+            });
+        }
 
         if ($request->has('month') && $request->get('year')) {
             $query->whereMonth('match_date', $request->get('month'))
                 ->whereYear('match_date', $request->get('year'));
         };
+
+        if ($request->has('status')) {
+            $status = $request->get('status');
+            $query->where('status', $status);
+        }
 
         $matches = $query->get();
 
