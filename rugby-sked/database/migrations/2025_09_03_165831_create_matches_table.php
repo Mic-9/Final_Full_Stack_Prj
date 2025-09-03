@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('matches', function (Blueprint $table) {
             $table->id();
+            $table->string('team_1');
+            $table->string('team_2');
+            $table->dateTime('date');
+            $table->string('status')->default('scheduled');
+            $table->integer('score_1')->nullable();
+            $table->integer('score_2')->nullable();
             $table->timestamps();
         });
     }
