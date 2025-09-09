@@ -29,4 +29,10 @@ class Fixture extends Model
         'score_1',
         'score_2',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_matches', 'matches_id', 'user_id')
+            ->withTimestamps();
+    }
 }

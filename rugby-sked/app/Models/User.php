@@ -45,4 +45,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function fixtures()
+    {
+        return $this->belongsToMany(Fixture::class, 'user_matches', 'user_id', 'matches_id')
+            ->withTimestamps();
+    }
 }
