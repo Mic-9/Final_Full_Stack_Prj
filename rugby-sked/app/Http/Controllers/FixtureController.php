@@ -31,6 +31,17 @@ class FixtureController extends Controller
         ]);
     }
 
+    public function favorites(Request $request): Response
+    {
+        /** @var \App\Models\User|null $user */
+        $user = $request->user();
+
+        $favorites = $user->fixtures()->orderBy('date', 'desc')->get();
+
+        return Inertia::render('Fixtures/Favorites', [
+            'fixtures' => $favorites
+        ]);
+    }
     public function toggleFavorite(Fixture $fixture)
     {
         /** @var \App\Models\User|null $user */

@@ -1,35 +1,19 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 use App\Http\Controllers\FixtureController;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+//home: public list of fixtures not only for logged in users
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [FixtureController::class, 'index'])
+    ->name('fixtures.index');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+//route for favorite fixtures only for logged in users
 
+Route::get('/dashboard', [FixtureController::class, 'favorites'])
+    ->name('fixtures.favorites')
+    ->middleware(['auth']);
 
-Route::get('/fixtures', function () {
-    return Inertia::render('Fixtures');
-})->name('fixtures.index');
-
-Route::get('/api/fixtures', [FixtureController::class, 'index']);
-
-require __DIR__ . '/auth.php';
+Route::post('/dashboard/{fixture}/toggle-favorite', [FixtureController::class, 'toggleFavorite'])
+    ->name('fixtures.toggle-favorite')
+    ->middleware(['auth']);
