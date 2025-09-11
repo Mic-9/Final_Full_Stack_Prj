@@ -25,9 +25,10 @@ class FixtureController extends Controller
             ? $user->fixtures()->pluck('matches_id')->toArray()
             : [];
 
-        return Inertia::render('Fixtures/Index', [
+        return Inertia::render('Welcome', [
             'fixtures' => $fixtures,
-            'userFavorites' => $userFavorites
+            'userFavorites' => $userFavorites,
+            'auth' => ['user' => $user],
         ]);
     }
 
@@ -38,8 +39,9 @@ class FixtureController extends Controller
 
         $favorites = $user->fixtures()->orderBy('date', 'desc')->get();
 
-        return Inertia::render('Fixtures/Favorites', [
-            'fixtures' => $favorites
+        return Inertia::render('Dashboard', [
+            'fixtures' => $favorites,
+            'auth' => ['user' => $user]
         ]);
     }
     public function toggleFavorite(Fixture $fixture)
