@@ -45,7 +45,8 @@ export default function Welcome() {
                 .includes(filters.searchTeam.toLowerCase());
 
         const matchDate =
-            !filters.dateFilter || fixture.date.startsWith(filters.dateFilter);
+            !filters.dateFilter ||
+            fixture.date.slice(0, 10) === filters.dateFilter;
 
         const matchStatus =
             !filters.statusFilter || fixture.status === filters.statusFilter;

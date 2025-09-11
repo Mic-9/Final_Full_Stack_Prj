@@ -31,7 +31,7 @@ const FixtureCard = ({ fixture, isFavorite, onToggleFavorite }) => {
             <div className="text-right">
                 {isFavorite ? (
                     <SecondaryButton onClick={handleToggle}>
-                        Delete
+                        Delete from favorites
                     </SecondaryButton>
                 ) : (
                     <PrimaryButton onClick={handleToggle}>Save</PrimaryButton>
