@@ -5,7 +5,7 @@ import FixtureFilters from "@/Components/FixtureFilters";
 import React from "react";
 
 export default function Welcome() {
-    const { auth, fixtures, userFavorites } = usePage().props;
+    const { auth, fixtures, userFavorites: initialFavorites } = usePage().props;
 
     const [filters, setFilters] = React.useState({
         searchTeam: "",
@@ -13,6 +13,10 @@ export default function Welcome() {
         categoryFilter: "",
         statusFilter: "",
     });
+
+    const [userFavorites, setUserFavorites] = React.useState(
+        initialFavorites || []
+    );
 
     const handleToggleFavorite = (fixtureId) => {
         if (!auth.user) {
@@ -25,6 +29,13 @@ export default function Welcome() {
             {},
             {
                 preserveScroll: true,
+                onSuccess: () => {
+                    setUserFavorites((prev) =>
+                        prev.includes(fixtureId)
+                            ? prev.filter((id) => id !== fixtureId)
+                            : [...prev, fixtureId]
+                    );
+                },
             }
         );
     };
@@ -66,7 +77,7 @@ export default function Welcome() {
                 <h1 className="text-2xl font-bold mb-6">Matches:</h1>
                 <FixtureList
                     fixtures={filteredFixtures}
-                    userFavorites={userFavorites || []}
+                    userFavorites={userFavorites}
                     onToggleFavorite={handleToggleFavorite}
                 />
             </div>

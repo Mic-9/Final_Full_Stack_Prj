@@ -22,7 +22,14 @@ export default function Dashboard() {
         router.post(
             `/dashboard/${fixtureId}/toggle-favorite`,
             {},
-            { preserveScroll: true }
+            {
+                preserveScroll: true,
+                onSuccess: () => {
+                    setFixtures((prev) =>
+                        prev.filter((f) => f.id !== fixtureId)
+                    );
+                },
+            }
         );
     };
 
@@ -55,7 +62,7 @@ export default function Dashboard() {
 
             <div className="max-w-4xl mx-auto py-8">
                 <h2 className="text-4xl font-bold mb-6">
-                    Filter Saved Matches
+                    Filter Saved Matches:
                 </h2>
                 <FixtureFilters onFilterChange={setFilters} />
             </div>
