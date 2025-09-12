@@ -49,9 +49,8 @@ class FixtureController extends Controller
         /** @var \App\Models\User|null $user */
         $user = Auth::user();
         if (!$user) {
-            return response()->json([
-                'message' => 'Not logged in'
-            ], 401);
+            return redirect()->route('login')
+                ->with('error', 'You must be logged.');
         }
 
         if ($user->fixtures()->where('matches_id', $fixture->id)->exists()) {
@@ -62,8 +61,6 @@ class FixtureController extends Controller
             $message = 'Added to favorites';
         }
 
-        return response()->json([
-            'message' => $message
-        ]);
+        return redirect()->back()->with('success', $message);
     }
 }

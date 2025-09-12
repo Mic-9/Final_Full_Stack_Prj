@@ -1,11 +1,19 @@
 import { Head, usePage, router } from "@inertiajs/react";
 import GuestLayout from "@/Layouts/GuestLayout";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import FixtureList from "@/Components/FixtureList";
 import FixtureFilters from "@/Components/FixtureFilters";
 import React from "react";
 
 export default function Welcome() {
-    const { auth, fixtures, userFavorites: initialFavorites } = usePage().props;
+    const {
+        auth,
+        fixtures,
+        userFavorites: initialFavorites,
+        flash = {},
+    } = usePage().props;
+
+    const Layout = auth.user ? AuthenticatedLayout : GuestLayout;
 
     const [filters, setFilters] = React.useState({
         searchTeam: "",
@@ -66,8 +74,20 @@ export default function Welcome() {
     });
 
     return (
-        <GuestLayout>
+        <Layout>
             <Head title="RugbySked" />
+
+            {flash.success && (
+                <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative max-w-4xl mx-auto my-4">
+                    <span className="block sm:inline">{flash.success}</span>
+                </div>
+            )}
+            {flash.error && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative max-w-4xl mx-auto my-4">
+                    <span className="block sm:inline">{flash.error}</span>
+                </div>
+            )}
+
             <div className="max-w-4xl mx-auto py-8">
                 <h2 className="text-4xl font-bold mb-6">Filter Matches</h2>
                 <FixtureFilters onFilterChange={setFilters} />
@@ -81,6 +101,6 @@ export default function Welcome() {
                     onToggleFavorite={handleToggleFavorite}
                 />
             </div>
-        </GuestLayout>
+        </Layout>
     );
 }

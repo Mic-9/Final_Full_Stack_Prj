@@ -5,7 +5,7 @@ import FixtureFilters from "@/Components/FixtureFilters";
 import React from "react";
 
 export default function Dashboard() {
-    const { auth, fixtures: initialFixtures } = usePage().props;
+    const { auth, fixtures: initialFixtures, flash = {} } = usePage().props;
 
     const [filters, setFilters] = React.useState({
         searchTeam: "",
@@ -59,6 +59,17 @@ export default function Dashboard() {
     return (
         <AuthenticatedLayout user={auth.user}>
             <Head title="Dashboard - Rugby Sked" />
+
+            {flash.success && (
+                <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative max-w-4xl mx-auto my-4">
+                    <span className="block sm:inline">{flash.success}</span>
+                </div>
+            )}
+            {flash.error && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative max-w-4xl mx-auto my-4">
+                    <span className="block sm:inline">{flash.error}</span>
+                </div>
+            )}
 
             <div className="max-w-4xl mx-auto py-8">
                 <h2 className="text-4xl font-bold mb-6">
