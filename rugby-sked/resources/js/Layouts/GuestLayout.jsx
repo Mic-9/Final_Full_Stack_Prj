@@ -10,7 +10,7 @@ export default function GuestLayout({ children }) {
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 justify-between">
                         <div className="flex">
-                            <div className="flex shrink-0 items-center border-2 border-gray-300 rounded-md px-2 py-1">
+                            <div className="flex shrink-0 items-center">
                                 <Link
                                     href="/"
                                     className="flex items-center text lg font-bold text-gray-900"

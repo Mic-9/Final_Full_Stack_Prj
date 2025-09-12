@@ -6,12 +6,7 @@ import FixtureFilters from "@/Components/FixtureFilters";
 import React from "react";
 
 export default function Welcome() {
-    const {
-        auth,
-        fixtures,
-        userFavorites: initialFavorites,
-        flash = {},
-    } = usePage().props;
+    const { auth, fixtures, userFavorites: initialFavorites } = usePage().props;
 
     const Layout = auth.user ? AuthenticatedLayout : GuestLayout;
 
@@ -25,6 +20,14 @@ export default function Welcome() {
     const [userFavorites, setUserFavorites] = React.useState(
         initialFavorites || []
     );
+
+    React.useEffect(() => {
+        if (auth.user) {
+            setUserFavorites(initialFavorites || []);
+        } else {
+            setUserFavorites([]);
+        }
+    }, [auth.user, initialFavorites]);
 
     const handleToggleFavorite = (fixtureId) => {
         if (!auth.user) {
@@ -77,19 +80,9 @@ export default function Welcome() {
         <Layout>
             <Head title="RugbySked" />
 
-            {flash.success && (
-                <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative max-w-4xl mx-auto my-4">
-                    <span className="block sm:inline">{flash.success}</span>
-                </div>
-            )}
-            {flash.error && (
-                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative max-w-4xl mx-auto my-4">
-                    <span className="block sm:inline">{flash.error}</span>
-                </div>
-            )}
+            <h2 className="text-4xl font-bold m-6">RugbySked</h2>
 
-            <div className="max-w-4xl mx-auto py-8">
-                <h2 className="text-4xl font-bold mb-6">Filter Matches</h2>
+            <div className="max-w-4xl mx-auto py-2">
                 <FixtureFilters onFilterChange={setFilters} />
             </div>
 

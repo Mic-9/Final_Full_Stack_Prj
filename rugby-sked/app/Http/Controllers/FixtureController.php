@@ -55,12 +55,10 @@ class FixtureController extends Controller
 
         if ($user->fixtures()->where('matches_id', $fixture->id)->exists()) {
             $user->fixtures()->detach($fixture->id);
-            $message = 'Removed from favorites';
         } else {
             $user->fixtures()->attach($fixture->id);
-            $message = 'Added to favorites';
         }
 
-        return redirect()->back()->with('success', $message);
+        return redirect()->back();
     }
 }
