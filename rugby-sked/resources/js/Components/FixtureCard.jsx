@@ -10,22 +10,22 @@ const FixtureCard = ({ fixture, isFavorite, onToggleFavorite }) => {
     };
 
     return (
-        <div className="border rounded-lg p-4 mb-4 shadow hover:shadow-lg transition">
+        <div className="border border-gray-700 rounded-lg p-4 mb-4 bg-gray-800 shadow hover:shadow-lg hover:bg-gray-900 transition">
             <div className="flex justify-between items-center mb-2">
-                <h2 className="text-lg font-bold">
+                <h2 className="text-lg font-bold text-gray-100">
                     {fixture.team_1} vs {fixture.team_2}
                 </h2>
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-gray-400">
                     {new Date(fixture.date).toLocaleDateString()}
                 </span>
             </div>
             <div className="mb-2">
                 {fixture.status === "finished" ? (
-                    <span className="text-gray-700">
+                    <span className="text-gray-300">
                         Result: {fixture.score_1} - {fixture.score_2}
                     </span>
                 ) : (
-                    <span className="text-green-600">Scheduled</span>
+                    <span className="text-green-500">Scheduled</span>
                 )}
             </div>
             <div className="text-right">

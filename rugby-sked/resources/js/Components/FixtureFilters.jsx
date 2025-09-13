@@ -23,33 +23,37 @@ const FixtureFilters = ({ onFilterChange }) => {
     };
 
     return (
-        <div className="mb-6 border p-4 rounded-lg shadow">
-            <h3 className="text-lg font-bold mb-2">Filter:</h3>
-            <form>
+        <div className="mb-6 border border-gray-700 bg-gray-800 p-4 rounded-lg shadow flex flex-col items-center">
+            <h3 className="text-lg font-bold mb-2 text-gray-100">Filter:</h3>
+            <form className="w-full max-w-md flex flex-col items-center gap-4">
                 <div className="mb-2">
-                    <label className="mr-2">Search by team: </label>
+                    <label className="mr-2 text-gray-300">
+                        Search by team:{" "}
+                    </label>
                     <input
                         type="text"
                         placeholder="Team"
                         value={searchTeam}
                         onChange={(e) => setSearchTeam(e.target.value)}
-                        className="border rounded px-2 py-1"
+                        className="border border-gray-600 rounded px-2 py-1 bg-gray-900 text-gray-100 placeholder-gray-500"
                     />
                 </div>
 
                 <div className="mb-2">
-                    <label className="mr-2">Filter by date: </label>
+                    <label className="mr-2 text-gray-300">
+                        Filter by date:{" "}
+                    </label>
                     <input
                         type="date"
                         value={dateFilter}
                         onChange={(e) => setDateFilter(e.target.value)}
-                        className="border rounded px-2 py-1"
+                        className="border border-gray-600 rounded px-2 py-1 bg-gray-900 text-gray-100 placeholder-gray-500"
                     />
                 </div>
 
                 <div className="mb-2">
-                    <span className="mr-2">Category: </span>
-                    <label className="mr-2">
+                    <span className="mr-2 text-gray-300">Category: </span>
+                    <label className="mr-2 text-gray-400">
                         <input
                             type="radio"
                             name="category"
@@ -59,7 +63,7 @@ const FixtureFilters = ({ onFilterChange }) => {
                         />{" "}
                         Men
                     </label>
-                    <label className="mr-2">
+                    <label className="mr-2 text-gray-400">
                         <input
                             type="radio"
                             name="category"
@@ -69,7 +73,7 @@ const FixtureFilters = ({ onFilterChange }) => {
                         />{" "}
                         Women
                     </label>
-                    <label>
+                    <label className="text-gray-400">
                         <input
                             type="radio"
                             name="category"
@@ -82,8 +86,8 @@ const FixtureFilters = ({ onFilterChange }) => {
                 </div>
 
                 <div className="mb-2">
-                    <span className="mr-2">Status: </span>
-                    <label className="mr-2">
+                    <span className="mr-2 text-gray-300">Status: </span>
+                    <label className="mr-2 text-gray-400">
                         <input
                             type="radio"
                             name="status"
@@ -93,7 +97,7 @@ const FixtureFilters = ({ onFilterChange }) => {
                         />{" "}
                         Finished
                     </label>
-                    <label>
+                    <label className="text-gray-400">
                         <input
                             type="radio"
                             name="status"
@@ -108,7 +112,7 @@ const FixtureFilters = ({ onFilterChange }) => {
                 <button
                     type="button"
                     onClick={resetFilters}
-                    className="mt-2 px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                    className="mt-2 px-3 py-1 bg-gray-700 text-gray-100 rounded hover:bg-gray-600 transition"
                 >
                     Reset Filters
                 </button>

@@ -3,7 +3,9 @@ import FixtureCard from "./FixtureCard";
 
 const FixtureList = ({ fixtures, userFavorites = [], onToggleFavorite }) => {
     if (!fixtures || fixtures.length === 0) {
-        return <p className="text-gray-500">No matches available.</p>;
+        return (
+            <p className="text-gray-400 text-center">No matches available.</p>
+        );
     }
 
     return (

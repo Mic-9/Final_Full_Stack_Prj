@@ -5,15 +5,15 @@ export default function GuestLayout({ children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
     return (
-        <div className="min-h-screen bg-gray-100">
-            <nav className="border-b border-gray-100 bg-white">
+        <div className="min-h-screen bg-gray-900 text-gray-100">
+            <nav className="border-b border-gray-700 bg-gray-800">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 justify-between">
                         <div className="flex">
                             <div className="flex shrink-0 items-center">
                                 <Link
                                     href="/"
-                                    className="flex items-center text lg font-bold text-gray-900"
+                                    className="flex items-center text-lg font-bold text-gray-100"
                                 >
                                     RugbySked
                                 </Link>
@@ -23,14 +23,14 @@ export default function GuestLayout({ children }) {
                         <div className="hidden sm:flex sm:items-center sm:space-x-4">
                             <Link
                                 href="/login"
-                                className="text-gray-800 hover:text-gray-600"
+                                className="text-gray-200 hover:text-gray-400"
                             >
                                 Login
                             </Link>
 
                             <Link
                                 href="/register"
-                                className="text-gray-800 hover:text-gray-600"
+                                className="text-gray-200 hover:text-gray-400"
                             >
                                 Register
                             </Link>
@@ -43,7 +43,7 @@ export default function GuestLayout({ children }) {
                                         (prev) => !prev
                                     )
                                 }
-                                className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:outline-none"
+                                className="inline-flex items-center justify-center rounded-md p-2 transition duration-150 ease-in-out focus:outline-none"
                             >
                                 <svg
                                     className="h-6 w-6"
@@ -81,27 +81,27 @@ export default function GuestLayout({ children }) {
                 <div
                     className={
                         (showingNavigationDropdown ? "block" : "hidden") +
-                        " sm:hidden"
+                        " sm:hidden bg-gray-800"
                     }
                 >
                     <div className="space-y-1 pb-3 pt-2">
                         <Link
                             href="/login"
-                            className="block px4 py-2 text-gray-700 hover:bg-gray-100"
+                            className="block px-4 py-2 text-gray-200 hover:bg-gray-700"
                         >
                             Login
                         </Link>
 
                         <Link
                             href="/register"
-                            className="block px4 py-2 text-gray-700 hover:bg-gray-100"
+                            className="block px-4 py-2 text-gray-200 hover:bg-gray-700"
                         >
                             Register
                         </Link>
                     </div>
                 </div>
             </nav>
-            <div>{children}</div>
+            <div className="py-6">{children}</div>
         </div>
     );
 }

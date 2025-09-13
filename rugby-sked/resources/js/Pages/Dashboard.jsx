@@ -61,27 +61,31 @@ export default function Dashboard() {
             <Head title="Dashboard - Rugby Sked" />
 
             {flash.success && (
-                <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative max-w-4xl mx-auto my-4">
+                <div className="bg-green-800 border border-green-700 text-green-100 px-4 py-3 rounded relative max-w-4xl mx-auto my-4">
                     <span className="block sm:inline">{flash.success}</span>
                 </div>
             )}
             {flash.error && (
-                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative max-w-4xl mx-auto my-4">
+                <div className="bg-red-800 border border-red-700 text-red-100 px-4 py-3 rounded relative max-w-4xl mx-auto my-4">
                     <span className="block sm:inline">{flash.error}</span>
                 </div>
             )}
 
             <div className="max-w-4xl mx-auto py-8">
-                <h2 className="text-4xl font-bold mb-6">
+                <h2 className="text-4xl font-bold mb-6 text-gray-100 text-center">
                     Filter Saved Matches:
                 </h2>
                 <FixtureFilters onFilterChange={setFilters} />
             </div>
 
             <div className="max-w-4xl mx-auto py-8">
-                <h1 className="text-2xl font-bold mb-6">Saved Matches:</h1>
+                <h1 className="text-2xl font-bold mb-6 text-gray-100 text-center">
+                    Saved Matches:
+                </h1>
                 {filteredFixtures.length === 0 ? (
-                    <p className="text-gray-500">No matches found.</p>
+                    <p className="text-gray-400 text-center">
+                        No matches found.
+                    </p>
                 ) : (
                     <FixtureList
                         fixtures={filteredFixtures}

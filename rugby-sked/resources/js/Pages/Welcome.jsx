@@ -80,14 +80,18 @@ export default function Welcome() {
         <Layout>
             <Head title="RugbySked" />
 
-            <h2 className="text-4xl font-bold m-6">RugbySked</h2>
+            <h2 className="text-4xl font-bold m-6 text-gray-100 text-center">
+                RugbySked
+            </h2>
 
             <div className="max-w-4xl mx-auto py-2">
                 <FixtureFilters onFilterChange={setFilters} />
             </div>
 
             <div className="max-w-4xl mx-auto py-8">
-                <h1 className="text-2xl font-bold mb-6">Matches:</h1>
+                <h1 className="text-2xl font-bold mb-6 text-gray-100 text-center">
+                    Matches:
+                </h1>
                 <FixtureList
                     fixtures={filteredFixtures}
                     userFavorites={userFavorites}
