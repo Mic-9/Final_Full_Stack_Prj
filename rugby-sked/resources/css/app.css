@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    @apply bg-gray-900 text-gray-100;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+label {
+    @apply text-gray-100;
+}
+
+span {
+    @apply text-white;
+}
+
+input,
+textarea,
+select {
+    @apply bg-gray-800 text-gray-100 border-gray-700 placeholder-gray-400;
+}
+
+.dropdown-content {
+    @apply bg-gray-800 border border-gray-700 text-gray-100;
+}
+
+.dropdown-link {
+    @apply block px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 hover:text-gray-100;
+}
